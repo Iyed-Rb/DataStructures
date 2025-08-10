@@ -28,61 +28,76 @@ public class MyHashTable : IDictionary
 {
     private HashEntry[] buckets;
     private int count;
-
+    private int initialCapacity = 4; // Default initial capacity
     public int Count => count;
 
     public MyHashTable(int size = 4)
     {
         buckets = new HashEntry[size];
         count = 0;
+        initialCapacity = size; // inside constructor
+
     }
 
-
-    public void Add(object Key, object Value)
+    private void Insert(object key, object value, bool overwrite)
     {
-        // Resize if load factor exceeded
-        if ((float)count / buckets.Length >= 0.75f)
+        if (key == null)
+            throw new ArgumentNullException(nameof(key));
+
+        if (!overwrite && (float)(count + 1) / buckets.Length >= 0.75f)
         {
             Resize();
         }
 
-        int hash = Key.GetHashCode();
-        int index = Math.Abs(hash % buckets.Length);
+        int hash = key.GetHashCode();
+        int index = (hash & 0x7FFFFFFF) % buckets.Length;
 
-        if (buckets[index] == null)
-        {
-            buckets[index] = new HashEntry(hash, Key, Value);
-            count++;
-        }
-        else
-        {
-            HashEntry current = buckets[index];
+        HashEntry current = buckets[index];
+        HashEntry previous = null;
 
-            while (true)
+        while (current != null)
+        {
+            if (current.Key.Equals(key))
             {
-                if (current.Key.Equals(Key))
-                {
-                    current.Value = Value;
-                    return;
-                }
+                if (!overwrite)
+                    throw new ArgumentException("An item with the same key already exists.");
 
-                if (current.Next == null)
-                {
-                    current.Next = new HashEntry(hash, Key, Value);
-                    count++;
-                    return;
-                }
-
-                current = current.Next;
+                current.Value = value;
+                return;
             }
+
+            previous = current;
+            current = current.Next;
         }
+
+        var newEntry = new HashEntry(hash,key, value);
+        if (previous == null)
+            buckets[index] = newEntry;
+        else
+            previous.Next = newEntry;
+
+        count++;
     }
+    public void Add(object key, object value)
+    {
+
+        Insert(key, value, overwrite: false);
+        
+
+    }
+
 
 
     public object Get(object Key)
     {
+        if (Key == null)
+            throw new ArgumentNullException(nameof(Key));
+
+
+
         int hash = Key.GetHashCode();
-        int index = Math.Abs(hash % buckets.Length);
+        int index = (hash & 0x7FFFFFFF) % buckets.Length;
+
 
         HashEntry current = buckets[index];
         while (current != null)
@@ -99,8 +114,12 @@ public class MyHashTable : IDictionary
     //safe alternative to Get, returns a boolean instead of throwing an exception.
     public bool TryGetValue(object Key, out object Value)
     {
+        if (Key == null)
+            throw new ArgumentNullException(nameof(Key));
+
         int hash = Key.GetHashCode();
-        int index = Math.Abs(hash % buckets.Length);
+        int index = (hash & 0x7FFFFFFF) % buckets.Length;
+
 
         HashEntry current = buckets[index];
         while (current != null)
@@ -119,8 +138,13 @@ public class MyHashTable : IDictionary
 
     public void Remove(object Key)
     {
+        if (Key == null)
+            throw new ArgumentNullException(nameof(Key));
+
+
         int hash = Key.GetHashCode();
-        int index = Math.Abs(hash % buckets.Length);
+        int index = (hash & 0x7FFFFFFF) % buckets.Length;
+
 
         HashEntry current = buckets[index];
         HashEntry previous = null;
@@ -149,8 +173,13 @@ public class MyHashTable : IDictionary
 
     public bool ContainsKey(object Key)
     {
+        if (Key == null)
+            throw new ArgumentNullException(nameof(Key));
+
+
         int hash = Key.GetHashCode();
-        int index = Math.Abs(hash % buckets.Length);
+        int index = (hash & 0x7FFFFFFF) % buckets.Length;
+
 
         HashEntry current = buckets[index];
         while (current != null)
@@ -179,10 +208,7 @@ public class MyHashTable : IDictionary
 
     public void Clear()
     {
-        for (int i = 0; i < buckets.Length; i++)
-        {
-            buckets[i] = null;
-        }
+        buckets = new HashEntry[initialCapacity]; 
         count = 0;
     }
 
@@ -192,14 +218,17 @@ public class MyHashTable : IDictionary
         int newSize = buckets.Length * 2;
         HashEntry[] oldBuckets = buckets;
         buckets = new HashEntry[newSize];
-        count = 0;
 
         foreach (var entry in oldBuckets)
         {
             HashEntry current = entry;
             while (current != null)
             {
-                Add(current.Key, current.Value); // Re-insert into new buckets
+                int index = (current.Key.GetHashCode() & 0x7FFFFFFF) % newSize;
+                HashEntry newEntry = new HashEntry(current.HashCode,current.Key, current.Value);
+                newEntry.Next = buckets[index];
+                buckets[index] = newEntry;
+
                 current = current.Next;
             }
         }
@@ -207,14 +236,19 @@ public class MyHashTable : IDictionary
 
 
     public bool Contains(object key) => ContainsKey(key);
-    public object this[object key] { get => Get(key); set => Add(key, value); }
+    public object this[object key]
+    {
+        get => Get(key);
+        set => Insert(key, value, overwrite: true);
+    }
+
     public bool IsFixedSize => false;
     public bool IsReadOnly => false;
     public ICollection Keys => GetKeys();
     public ICollection Values => GetValues();
     private ICollection GetKeys()
     {
-        List<object> keys = new List<object>();
+        List<object> keys = new List<object>(count); // reserve space for exactly count items
         foreach (var bucket in buckets)
         {
             HashEntry current = bucket;
@@ -229,7 +263,7 @@ public class MyHashTable : IDictionary
 
     private ICollection GetValues()
     {
-        List<object> values = new List<object>();
+        List<object> values = new List<object>(count);
         foreach (var bucket in buckets)
         {
             HashEntry current = bucket;
