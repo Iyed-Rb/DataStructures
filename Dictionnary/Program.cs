@@ -229,8 +229,6 @@ public class MyDictionary<TKey, TValue> : IDictionary<TKey, TValue>
         }
     }
 
-    // ICollection<KeyValuePair<TKey, TValue>> implementation
-
     public void Add(KeyValuePair<TKey, TValue> item) => Add(item.Key, item.Value);
 
     public bool Contains(KeyValuePair<TKey, TValue> item)

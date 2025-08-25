@@ -35,8 +35,6 @@ public class MyHashSet<T> : ICollection<T>, IEnumerable<T>, ISet<T>
             Add(item);
         }
     }
-
-
     public int Count => count;
     public bool IsReadOnly => false;
 
