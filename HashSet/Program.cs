@@ -144,7 +144,6 @@ public class MyHashSet<T> : ICollection<T>, IEnumerable<T>, ISet<T>
             }
         }
     }
-
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
     public void CopyTo(T[] array, int arrayIndex)
