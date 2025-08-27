@@ -30,7 +30,6 @@ public class clsSortedDictionnary<TKey,TValue>: IDictionary<TKey, TValue>
         public Node Parent;
         public NodeColor Color;
 
-
         public Node(TKey key, TValue value)
         {
             Key = key;
@@ -274,7 +273,6 @@ public class clsSortedDictionnary<TKey,TValue>: IDictionary<TKey, TValue>
         }
     }
 
-    // Max: return the KeyValuePair with the largest key
     public KeyValuePair<TKey, TValue> Max
     {
         get
@@ -323,10 +321,6 @@ public class clsSortedDictionnary<TKey,TValue>: IDictionary<TKey, TValue>
         _count = 0;
     }
 
-
-
-
-    private List<KeyValuePair<TKey, TValue>> _items = new List<KeyValuePair<TKey, TValue>>();
 
     public ICollection<TKey> Keys => new KeysCollection(this);
     public ICollection<TValue> Values => new ValuesCollection(this);
@@ -433,7 +427,6 @@ public class clsSortedDictionnary<TKey,TValue>: IDictionary<TKey, TValue>
             Add(key, value);
         }
     }
-
 
     public bool TryGetValue(TKey key, out TValue value)
     {
