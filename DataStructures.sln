@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Trees", "Trees", "{B45AA14F
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeneralTree", "GeneralTree\GeneralTree.csproj", "{12D28D60-A9F7-41A5-9C87-D13E152E8494}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinaryTree", "BinaryTree\BinaryTree.csproj", "{C5902B29-9453-4D86-99AE-53F3539DE577}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,12 +79,17 @@ Global
 		{12D28D60-A9F7-41A5-9C87-D13E152E8494}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{12D28D60-A9F7-41A5-9C87-D13E152E8494}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{12D28D60-A9F7-41A5-9C87-D13E152E8494}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C5902B29-9453-4D86-99AE-53F3539DE577}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5902B29-9453-4D86-99AE-53F3539DE577}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5902B29-9453-4D86-99AE-53F3539DE577}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5902B29-9453-4D86-99AE-53F3539DE577}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{12D28D60-A9F7-41A5-9C87-D13E152E8494} = {B45AA14F-F661-4FED-B3E5-8A99EE6F37F1}
+		{C5902B29-9453-4D86-99AE-53F3539DE577} = {B45AA14F-F661-4FED-B3E5-8A99EE6F37F1}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A36475BC-F748-4BFA-92C4-A012470551D8}
