@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3B5D157A-2E98-4858-B67A-78F2DA26068E}</ProjectGuid>
+    <ProjectGuid>{F20D9E5B-664F-4814-893B-1BA901F9664C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>BinarySearchTree</RootNamespace>
-    <AssemblyName>BinarySearchTree</AssemblyName>
+    <RootNamespace>AVLTree</RootNamespace>
+    <AssemblyName>AVLTree</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
