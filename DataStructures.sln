@@ -37,7 +37,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Heap", "Heap", "{14F9B4E1-9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinHeap", "MinHeap\MinHeap.csproj", "{20265893-813E-4559-9FE5-EC9D4134F0B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MaxHeap", "MaxHeap\MaxHeap.csproj", "{CE6A7F2B-A188-4731-930E-EB8E5782528C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MaxHeap", "MaxHeap\MaxHeap.csproj", "{CE6A7F2B-A188-4731-930E-EB8E5782528C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PriorityQueue", "PriorityQueue\PriorityQueue.csproj", "{69E49832-F061-43D0-9A9B-65611DF2ADB1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +111,10 @@ Global
 		{CE6A7F2B-A188-4731-930E-EB8E5782528C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE6A7F2B-A188-4731-930E-EB8E5782528C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE6A7F2B-A188-4731-930E-EB8E5782528C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69E49832-F061-43D0-9A9B-65611DF2ADB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{69E49832-F061-43D0-9A9B-65611DF2ADB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{69E49832-F061-43D0-9A9B-65611DF2ADB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69E49832-F061-43D0-9A9B-65611DF2ADB1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
